@@ -3,23 +3,23 @@ pipeline {
 
     stages {
 
-        stage('Git Checkout') {
+        stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Build Images') {
+        stage('Build Backend') {
             steps {
-                sh 'docker compose build'
+                sh 'docker build -t micro-backend ./backend'
             }
         }
 
-        stage('Deploy Containers') {
+        stage('Build Frontend') {
             steps {
-                sh 'docker compose down'
-                sh 'docker compose up -d'
+                sh 'docker build -t micro-frontend ./frontend'
             }
         }
     }
 }
+
